@@ -1,15 +1,12 @@
+import { RouterProvider } from 'react-router-dom';
 import Layout from './components/layout/layout';
-import Brand from './features/Brand';
-import NewArrival from './features/NewArrival';
-import OnSale from './features/OnSale';
+import routers from './router/routes';
 
 function App() {
   return (
-    <Layout>
-      <OnSale />
-      <NewArrival />
-      <Brand />
-    </Layout>
+    // <Layout>
+      <RouterProvider router={routers} />
+    // </Layout>
   );
 }
 
