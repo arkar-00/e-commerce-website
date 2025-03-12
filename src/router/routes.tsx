@@ -5,6 +5,8 @@ import Product from '../pages/Product';
 import Cart from '../pages/Cart';
 import Profile from '../pages/Profile';
 import Layout from '../components/layout/layout';
+import Login from '../pages/Login';
+import { PrivateRoute } from '../context/AuthContext';
 
 const routers = createBrowserRouter([
   {
@@ -13,9 +15,27 @@ const routers = createBrowserRouter([
       { path: '/', element: <Home /> },
       { path: '/products', element: <Product /> },
       { path: '/about', element: <About /> },
-      { path: '/cart', element: <Cart /> },
-      { path: '/profile', element: <Profile /> },
+      {
+        path: '/cart',
+        element: (
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: '/profile',
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
     ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
 ]);
 

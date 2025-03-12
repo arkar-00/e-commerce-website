@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { CircleUser, Menu, ShoppingCart, X } from 'lucide-react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const NAV_DATA = {
   header_name: 'SHOP.CO',
@@ -14,8 +15,8 @@ const NAV_DATA = {
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   return (
     <header className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
@@ -47,14 +48,18 @@ const Header = () => {
         </div>
 
         {/* Icons */}
-        <div className="flex flex-row">
-          <Button variant="ghost" size="icon" onClick={() => navigate('/cart')}>
-            <ShoppingCart size={24} />
-          </Button>
-          <Button variant="ghost" size="icon" onClick={() => navigate('/profile')}>
-            <CircleUser size={24} />
-          </Button>
-        </div>
+        {isAuthenticated ? (
+          <div className="flex flex-row">
+            <Button variant="ghost" size="icon" onClick={() => navigate('/cart')}>
+              <ShoppingCart size={24} />
+            </Button>
+            <Button variant="ghost" size="icon" onClick={() => navigate('/profile')}>
+              <CircleUser size={24} />
+            </Button>
+          </div>
+        ) : (
+          <Button onClick={() => navigate('/login')}>Login</Button>
+        )}
       </div>
 
       {/* Mobile Menu (Fixed Issue) */}
