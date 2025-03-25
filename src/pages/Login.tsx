@@ -23,15 +23,16 @@ const LoginSchema = z.object({
 type LoginFormData = z.infer<typeof LoginSchema>;
 
 const Login = () => {
-  // const { login } = useAuth();
-  // const navigate = useNavigate();
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(LoginSchema),
   });
 
   const handleOnLogin = (data: LoginFormData) => {
-    console.log('Form data', data);
+    login({ email: data.email, username: 'Arkar Oo' });
+    navigate('/');
   };
 
   return (

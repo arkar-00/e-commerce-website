@@ -16,7 +16,7 @@ const NAV_DATA = {
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, profile } = useAuth();
 
   return (
     <header className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
@@ -48,7 +48,7 @@ const Header = () => {
         </div>
 
         {/* Icons */}
-        {isAuthenticated ? (
+        {profile ? (
           <div className="flex flex-row">
             <Button variant="ghost" size="icon" onClick={() => navigate('/cart')}>
               <ShoppingCart size={24} />
